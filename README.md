@@ -1,4 +1,6 @@
 install 
+ 
+    git clone https://github.com/Iqlast/nexus-Bweb.git
 
     npm install fs
     npm install axios
