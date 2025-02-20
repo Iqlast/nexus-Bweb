@@ -1,20 +1,32 @@
 install 
 
-npm install fs
-npm install axios
-npm install ethers
-npm install https-proxy-agent
+    npm install fs
+    npm install axios
+    npm install ethers
+    npm install https-proxy-agent
 
-buat file wallet.txt , nano wallet.txt 
+buat file wallet.txt
+
+    nano wallet.txt
+
 masukan private key format :
-0X32XXXX
-0x32xxxx
+
+    0x32xxxx
 
 
-run tanpa proxy
+Run Tanpa Proxy
 
-node mul.js 
+    node mul.js 
 
 run pake proxy
 
-node v1.js
+    node v1.js
+
+Buat file "proxy.txt" 
+
+    nano proxy.txt
+
+Format proxy;
+
+httpp://username:pass@ip:port
+
