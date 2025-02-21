@@ -50,7 +50,7 @@ const wallets = getWallets();
 proxies = getProxies();
 
 console.log(`Menggunakan ${wallets.length} wallet:`);
-wallets.forEach(wallet => console.log(`- ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})`));
+wallets.forEach(wallet => console.log(`- (Private Key: ${maskPrivateKey(wallet.privateKey)})`));
 
 // Memilih proxy secara random
 function getRandomProxy() {
@@ -80,11 +80,11 @@ function createAxiosInstance(proxy) {
 async function authenticate(wallet, axiosInstance) {
     try {
         const response = await axiosInstance.get(AUTH_URL, { headers: { 'x-dyn-api-version': 'API/0.0.599' } });
-        console.log(`Autentikasi berhasil untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
+        console.log(`Autentikasi berhasil untuk (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
         console.log('Respon Server:', response.data);
         return response.data;
     } catch (error) {
-        console.error(`Gagal mendapatkan nonce untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
+        console.error(`Gagal mendapatkan nonce untuk (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
         return null;
     }
 }
@@ -101,11 +101,11 @@ async function sendPing(wallet, axiosInstance) {
         const balanceInWei = response.data.result;
         const balanceInNex = ethers.formatUnits(balanceInWei, NEX_DECIMALS);
         
-        console.log(`Ping success untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)}): Balance NEX: ${balanceInNex}`);
+        console.log(`Ping success untuk (Private Key: ${maskPrivateKey(wallet.privateKey)}): Balance NEX: ${balanceInNex}`);
         console.log('Respon Server:', response.data);
         isDisconnected[wallet.address] = false;
     } catch (error) {
-        console.error(`Ping gagal untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)}), koneksi terputus!`);
+        console.error(`Ping gagal untuk (Private Key: ${maskPrivateKey(wallet.privateKey)}), koneksi terputus!`);
         if (!isDisconnected[wallet.address]) {
             isDisconnected[wallet.address] = true;
             reconnect(wallet, axiosInstance);
@@ -115,10 +115,10 @@ async function sendPing(wallet, axiosInstance) {
 
 async function reconnect(wallet, axiosInstance) {
     while (isDisconnected[wallet.address]) {
-        console.log(`Mencoba menyambungkan kembali untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})...`);
+        console.log(`Mencoba menyambungkan kembali untuk (Private Key: ${maskPrivateKey(wallet.privateKey)})...`);
         const auth = await authenticate(wallet, axiosInstance);
         if (auth) {
-            console.log(`Reconnected untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})!`);
+            console.log(`Reconnected untuk (Private Key: ${maskPrivateKey(wallet.privateKey)})!`);
             isDisconnected[wallet.address] = false;
         } else {
             await new Promise(resolve => setTimeout(resolve, RECONNECT_INTERVAL));
@@ -151,11 +151,11 @@ async function getTask(wallet, axiosInstance) {
                 'sec-ch-ua-platform': '"Windows"'
             }
         });
-        console.log(`Task berhasil didapatkan untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
+        console.log(`Task berhasil didapatkan untuk (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
         console.log('Respon Server:', response.data);
         return response.data;
     } catch (error) {
-        console.error(`Gagal mendapatkan task untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
+        console.error(`Gagal mendapatkan task untuk (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
         return null;
     }
 }
@@ -185,11 +185,11 @@ async function submitTask(wallet, axiosInstance) {
                 'sec-ch-ua-platform': '"Windows"'
             }
         });
-        console.log(`Task berhasil disubmit untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
+        console.log(`Task berhasil disubmit untuk (Private Key: ${maskPrivateKey(wallet.privateKey)})`);
         console.log('Respon Server:', response.data);
         return response.data;
     } catch (error) {
-        console.error(`Gagal submit task untuk ${wallet.address} (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
+        console.error(`Gagal submit task untuk (Private Key: ${maskPrivateKey(wallet.privateKey)}):`, error.message);
         return null;
     }
 }
