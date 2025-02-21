@@ -17,14 +17,9 @@ masukan private key format :
 
     0x32xxxx
 
+Run Bot
 
-Run Tanpa Proxy
-
-    node mul.js 
-
-run pake proxy
-
-    node v1.js
+    node bot.py
 
 Buat file "proxy.txt" 
 
